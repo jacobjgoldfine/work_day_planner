@@ -8,21 +8,40 @@ var dayDisplay = today.format("dddd, MMMM Do");
 dateEl.text(dayDisplay);
 
 function timeChange() {
-  var hour = "10";
-  //   var hour = today.format("HH");
-  Number(hour);
+  // var hour = "13";
+  var hour = today.format("HH");
   for (i = 0; i < textBoxEl.length; i++) {
     var timeId = textBoxEl[i].id;
-    Number(timeId);
-    if (timeId < hour) {
-      timeId.addClass("past");
-    } else if (timeId == hour) {
-      timeId.addClass("present");
+    if (Number(timeId) < Number(hour)) {
+      textBoxEl[i].classList.add("past");
+    } else if (Number(timeId) === Number(hour)) {
+      textBoxEl[i].classList.add("present");
     } else {
-      timeId.addClass("future");
+      textBoxEl[i].classList.add("future");
     }
-    console.log(timeId);
   }
 }
 
+saveBtnEl.on("click", function () {
+  var toDoText = $(this).siblings(".description").val();
+  var toDoTime = $(this).siblings(".description").attr("id");
+
+  localStorage.setItem(toDoTime, toDoText);
+  toDoLoad();
+});
+
+function toDoLoad() {
+  $("#9").val(localStorage.getItem("9"));
+  $("#10").val(localStorage.getItem("10"));
+  $("#11").val(localStorage.getItem("11"));
+  $("#12").val(localStorage.getItem("12"));
+  $("#13").val(localStorage.getItem("13"));
+  $("#14").val(localStorage.getItem("14"));
+  $("#15").val(localStorage.getItem("15"));
+  $("#16").val(localStorage.getItem("16"));
+  $("#17").val(localStorage.getItem("17"));
+}
+
 timeChange();
+
+toDoLoad();
