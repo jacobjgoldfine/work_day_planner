@@ -8,20 +8,18 @@ var dayDisplay = today.format("dddd, MMMM Do");
 dateEl.text(dayDisplay);
 
 function timeChange() {
-  // var hour = "13";
   var hour = today.format("HH");
-  for (i = 0; i < textBoxEl.length; i++) {
-    var timeId = textBoxEl[i].id;
+  textBoxEl.each(function (element) {
+    var timeId = $(this).attr("id");
     if (Number(timeId) < Number(hour)) {
-      textBoxEl[i].classList.add("past");
+      $(this).addClass("past");
     } else if (Number(timeId) === Number(hour)) {
-      textBoxEl[i].classList.add("present");
+      $(this).addClass("present");
     } else {
-      textBoxEl[i].classList.add("future");
+      $(this).addClass("future");
     }
-  }
+  });
 }
-
 saveBtnEl.on("click", function () {
   var toDoText = $(this).siblings(".description").val();
   var toDoTime = $(this).siblings(".description").attr("id");
